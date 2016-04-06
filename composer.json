@@ -1,0 +1,17 @@
+{
+    "name": "textagroup/social-media",
+    "description": "A SilverStripe module to share content to Facebook, Linkedin and Twitter'",
+    "type": "silverstripe-module",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Kirk Mayo",
+            "email": "kirk.mayo@solnet.co.nz"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "jublonet/codebird-php": "2.5.0",
+        "facebook/php-sdk-v4": "^5.0@dev"
+    }
+}
