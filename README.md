@@ -17,7 +17,7 @@ to Facebook, LinkedIn and Twitter.
 
 ## Composer Installation
 
-    composer require textagroup/social-media-page
+	composer require textagroup/social-media-page
 
 ## Installation Manual
 
