@@ -31,8 +31,9 @@ class LinkedinPublish extends Controller {
 		} else {
 			//if not authenticated
 			$url = $linkedIn->getLoginUrl();
-			// TODO Internationalisation
-			return "<a href='$url'>Login with LinkedIn</a>";
+			return "<a href='$url'>" .
+				_t('SocialMediaPage.LOGINTOLINKEDIN', 'Login to LinkedIn') .
+				'</a>';
 		}
 	}
 } 

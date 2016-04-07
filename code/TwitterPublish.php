@@ -17,7 +17,10 @@ class TwitterPublish extends Controller {
 			));
 			$this->TwitterStatus = 'Sent';
 		} catch (Exception $e) {
-			SS_Log::log('Twitter exception: '.$e->getMessage(), SS_Log::WARN);
+			SS_Log::log(
+				_t('SocialMediaPage.TWITTEREXCEPTION', 
+					'Twitter exception: ') . $e->getMessage(), SS_Log::WARN
+			);
 		}
 	}
 }

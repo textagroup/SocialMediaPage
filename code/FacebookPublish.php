@@ -56,7 +56,9 @@ class FacebookPublish extends Controller {
 						  'req_perms' => 'manage_pages,publish_pages,publish_actions'
 					 )
 				);
-				return "<a href='$loginURL'>Login to Facebook</a>";
+				return "<a href='$loginURL'>" . 
+					_t('SocialMediaPage.LOGINFACEBOOK', 'Login to Facebook')
+					. '</a>';
 		  }
 		  return true;
 	 }
@@ -78,7 +80,9 @@ class FacebookPublish extends Controller {
 						  : null;
 					 // throw user error id no facebook page id is set
 					 if ($pageId == null) {
-						  return 'Facebook page ID must be set';
+						return _t('SocialMediaPage.FACEBOOKPAGEIDNOTSET',
+							'Facebook page ID must be set'
+						);
 					 }
 					 // get page access token
 					 $response = $this->fb->get("/$pageId?fields=access_token", $accessToken);
@@ -87,10 +91,12 @@ class FacebookPublish extends Controller {
 					 // post to feed using page access token
 					 $response = $this->fb->post("/$pageId/feed", $linkData, $pageAccessToken);
 				} catch (Facebook\Exceptions\FacebookResponseException $e) {
-					 echo 'Graph returned an error: ' . $e->getMessage();
+					 echo _t('SocialMediaPage.GRAPHRETURNEDERROR', 
+						'Graph returned an error: ') . $e->getMessage();
 					 exit;
 				} catch (Facebook\Exceptions\FacebookSDKException $e) {
-					 echo 'Facebook SDK returned an error: ' . $e->getMessage();
+					 echo _t('SocialMediaPage.GRAPHRETURNEDERROR',
+						'Facebook SDK returned an error: ') . $e->getMessage();
 					 exit;
 				}
 		  }

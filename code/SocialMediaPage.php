@@ -15,10 +15,18 @@ class SocialMediaPage extends Page {
 		
 		$fields = parent::getCMSFields();
 
-		$fields->addFieldToTab('Root.Social', new CheckBoxField('FacebookPost'));
-		$fields->addFieldToTab('Root.Social', new CheckBoxField('LinkedInPost'));
-		$fields->addFieldToTab('Root.Social', new CheckBoxField('TwitterPost'));
-		$fields->addFieldToTab('Root.Social', new TextField('SocialMediaInfo'));
+		$fields->addFieldToTab('Root.Social', new CheckBoxField('FacebookPost',
+			_t('SocialMediaPage.FACEBOOKPOST', 'Facebook Post'))
+		);
+		$fields->addFieldToTab('Root.Social', new CheckBoxField('LinkedInPost',
+			_t('SocialMediaPage.LINKEDINPOST', 'LinkedIn Post'))
+		);
+		$fields->addFieldToTab('Root.Social', new CheckBoxField('TwitterPost',
+			_t('SocialMediaPage.TWITTERPOST', 'Twitter Post'))
+		);
+		$fields->addFieldToTab('Root.Social', new TextField('SocialMediaInfo',
+			_t('SocialMediaPage.SOCIALMEDIAINFO', 'Social Media Info'))
+		);
 
 		return $fields;
 	}
