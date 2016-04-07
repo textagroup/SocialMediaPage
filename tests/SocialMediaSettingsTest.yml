@@ -1,0 +1,16 @@
+SiteConfig:
+  media:
+    FacebookAppId: fbApp1234
+    FacebookPageId: fbPage1234
+    FacebookSecret: fbSecret1234
+    FacebookAccessToken: fbAccessToken1234
+    FacebookAccessTokenDate: 2016-02-29 00:00:00
+    FacebookAccessTokenClear: false
+    LinkedInId: ln1234
+    LinkedInSecret: lnSecret1234
+    LinkedInAccessToken: lnAccessToken1234
+    LinkedInAccessTokenClear: false
+    TwitterConsumerKey: tKey1234
+    TwitterConsumerSecret: tSecret1234
+    TwitterAccessToken: tAccessToken1234
+    TwitterAccessSecret: tAccessSecret1234
