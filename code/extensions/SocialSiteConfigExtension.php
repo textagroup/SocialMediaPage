@@ -30,22 +30,22 @@ class SocialSiteConfigExtension extends DataExtension {
 		} else {
 			$helpImage = SOCIALMEDIA_MODULE_DIR . '/images/en_US';
 		}
-		$fields->addFieldToTab("Root.SocialMedia.FacebookPublish",
+		$fields->addFieldToTab("Root.SocialMedia.Facebook",
 			TextField::create(
 				'FacebookAppId',
-				'Facebook App ID'
+				_t('SocialMediaPage.FACEBOOKAPPID', 'Facebook App ID')
 			)
 		);
-		$fields->addFieldToTab("Root.SocialMedia.FacebookPublish",
+		$fields->addFieldToTab("Root.SocialMedia.Facebook",
 			TextField::create(
 				'FacebookPageId',
-				'Facebook Page ID'
+				_t('SocialMediaPage.FACEBOOKPAGEID', 'Facebook Page ID')
 			)
 		);
-		$fields->addFieldToTab("Root.SocialMedia.FacebookPublish",
+		$fields->addFieldToTab("Root.SocialMedia.Facebook",
 			TextField::create(
 				'FacebookSecret',
-				'Facebook Secret'
+				_t('SocialMediaPage.FACEBOOKSECRET', 'Facebook Secret')
 			)
 		);
 		$facebook = singleton('FacebookPublish');
@@ -56,38 +56,41 @@ class SocialSiteConfigExtension extends DataExtension {
 			$now = strtotime('now');
 			$tokenAge = floor(($tokenExpires - $now) / 86400);
 			if ($tokenAge > 0 ) {
-				$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
+				$fields->addFieldToTab('Root.SocialMedia.Facebook',
 					LiteralField::create(
 						'FacebookAccessTokenExpires',
-						// TODO Internationalisation
-						"Token expires in $tokenAge days"
+						_t('SocialMediaPage.TOKENEXPIRES',
+							'Token expires in {tokenAge} days',
+							array('tokenAge' => $tokenAge)
+						)
 					)
 				);
-				$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
+				$fields->addFieldToTab('Root.SocialMedia.Facebook',
 					CheckboxField::create(
 						'FacebookAccessTokenClear',
-						// TODO Internationalisation
-						'Clear Facebook Access Token'
+						_t('SocialMediaPage.CLEARFACEBOOKACCESSTOKEN',
+							'Clear Facebook Access Token'
+						)
 					)
 				);
 			} else {
-				$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
+				$fields->addFieldToTab('Root.SocialMedia.Facebook',
 					LiteralField::create(
 						'FacebookAccessTokenExpires',
-						// TODO Internationalisation
-						'Token has expired'
+						_t('SocialMediaPage.TOKENEXPIRED', 'Token has expired')
 					)
 				);
 			}
 		} else {
-			$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
+			$fields->addFieldToTab('Root.SocialMedia.Facebook',
 				CheckboxField::create(
 					'FacebookAccessTokenClear',
-					 // TODO Internationalisation
-					'Clear Facebook Access Token'
+					_t('SocialMediaPage.CLEARFACEBOOKACCESSTOKEN',
+						'Clear Facebook Access Token'
+					)
 				)
 			);
-			$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
+			$fields->addFieldToTab('Root.SocialMedia.Facebook',
 				LiteralField::create(
 					'FacebookLogin',
 					$validAccessToken
@@ -95,9 +98,11 @@ class SocialSiteConfigExtension extends DataExtension {
 			);
 		}
 		if ($this->owner->FacebookAccessToken) {
-			$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
+			$fields->addFieldToTab('Root.SocialMedia.Facebook',
 				TextField::create('FacebookAccessToken',
-					'FacebookAccessToken',
+					_t('SocialMediaPage.FACEBOOKACCESSTOKEN',
+						'Facebook Access Token'
+					),
 					$this->owner->FacebookAccessToken
 				)
 			);
@@ -107,30 +112,35 @@ class SocialSiteConfigExtension extends DataExtension {
 		$fields->addFieldToTab("Root.SocialMedia.LinkedInPublish",
 			TextField::create(
 				 'LinkedInId',
-				 // TODO Internationalisation
-				'LinkedIn Page ID'
+				_t('SocialMediaPage.LINKEDINPAGEID',
+					'LinkedIn Page ID'
+				)
 			)
 		);
 		$fields->addFieldToTab("Root.SocialMedia.LinkedInPublish",
 			TextField::create(
-				 // TODO Internationalisation
 				'LinkedInSecret',
-				'LinkedIn Secret'
+				_t('SocialMediaPage.LINKEDINSECRET',
+					'LinkedIn Secret'
+				)
 			)
 		);
 
 		if ($this->owner->LinkedInAccessToken) {
 			$fields->addFieldToTab('Root.SocialMedia.LinkedInPublish',
 				TextField::create('LinkedInAccessToken',
-					'LinkedInAccessToken',
+					_t('SocialMediaPage.LINKEDINACCESSTOKEN',
+						'LinkedIn Access Token'
+					),
 					$this->owner->LinkedInAccessToken
 				)
 			);
 			$fields->addFieldToTab('Root.SocialMedia.LinkedInPublish',
 				CheckboxField::create(
 					'LinkedInAccessTokenClear',
-					// TODO Internationalisation
-					'Clear LinkedIn Access Token'
+					_t('SocialMediaPage.CLEARLINKEDINACCESSTOKEN',
+						'Clear LinkedIn Access Token'
+					)
 				)
 			);
 		} else {
@@ -150,15 +160,19 @@ class SocialSiteConfigExtension extends DataExtension {
 					$siteConfig->LinkedInAccessToken = $accessToken;
 					$siteConfig->write();
 					$fields->addFieldToTab('Root.SocialMedia.LinkedInPublish',
-						// TODO Internationalisation
 						TextField::create('LinkedInAccessToken',
-							'LinkedIn Access Token',
+							_t('SocialMediaPage.LINKEDINACCESSTOKEN',
+								'LinkedIn Access Token'
+							),
 							$accessToken
 						)
 					);
 				} else {
 					$loginURL = $linkedIn->getLoginURL();
-					$linkedinLogin = "<a href='$loginURL'>Login to LinkedIn</a>";
+					$linkedinLogin = "<a href='$loginURL'>" .
+						_t('SocialMediaPage.LOGINTOLINKEDIN',
+							'Login to LinkedIn') .
+						'</a>';
 					$fields->addFieldToTab('Root.SocialMedia.LinkedInPublish',
 						new LiteralField('LikedInLogin', $linkedinLogin)
 					);
@@ -168,25 +182,44 @@ class SocialSiteConfigExtension extends DataExtension {
 
 		// Twitter settings
 		$fields->addFieldsToTab('Root.SocialMedia.Twitter', array(
-			HeaderField::create('TwitterHeader', 'Twitter Publishing'),
-			// TODO Internationalisation
+			HeaderField::create('TwitterHeader',
+				_t('SocialMediaPage.TWITTERPUBLISHING',
+					'Twitter Publishing')
+			),
 			LiteralField::create(
 				'TwitterHelp', 
-				'Note that you will need to set up a separate Twitter App for each server you run a copy of the site on, '.
-				'eg. uat and prod.'
+				_t('SocialMediaPage.TWITTERHELP',
+					'Note that you will need to set up a separate Twitter ' .
+					'App for each server you run a copy of the site on, ' .
+					'eg. uat and prod.'
+				)
 			),
-			TextField::create('TwitterConsumerKey', 'Consumer Key'),
-			TextField::create('TwitterConsumerSecret', 'Consumer Secret'),
-			TextField::create('TwitterAccessToken', 'Access Token'),
-			TextField::create('TwitterAccessSecret', 'Access Token Secret')
-			// TODO Internationalisation
+			TextField::create('TwitterConsumerKey', _t('SocialMediaPage.CONSUMERKEY',
+				'Consumer Key')
+			),
+			TextField::create('TwitterConsumerSecret', _t('SocialMediaPage.CONSUMERSECRET',
+				'Consumer Secret')
+			),
+			TextField::create('TwitterAccessToken', _t('SocialMediaPage.ACCESSTOKEN',
+				'Access Token')
+			),
+			TextField::create('TwitterAccessSecret', _t('SocialMediaPage.ACCESSTOKENSECRET',
+				'Access Token Secret')
+			)
 			->setDescription(
-				'Visit <a href="https://apps.twitter.com/">https://apps.twitter.com/</a> and log in as the user '.
-				'maintaining the Twitter App for this site.<br>'.
-				'You will find the required API details on the "Keys and Access Tokens" tab.<br><br>'.
-				'<img src="'. $helpImage .'_twitter-help.png">'
+				_t('SocialMediaPage.TWITTERINFO',
+					'Visit <a href="https://apps.twitter.com/">https://apps.twitter.com/</a> and log in as the user '.
+					'maintaining the Twitter App for this site.<br>'.
+					'You will find the required API details on the "Keys and Access Tokens" tab.<br><br>'.
+					'<img src="{helpImage}_twitter-help.png">',
+					array('helpImage' => $helpImage)
+				)
 			)
 		));
+
+		// Name the LinkedIn tab correctly
+		$linkedInTab = $fields->findOrMakeTab('Root.SocialMedia.LinkedInPublish');
+		$linkedInTab->setTitle('LinkedIn');
 	}
 
 	public function populateDefaults() {
