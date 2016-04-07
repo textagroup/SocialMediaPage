@@ -1,5 +1,5 @@
 {
-    "name": "textagroup/SocialMediaPage",
+    "name": "textagroup/social-media-page",
     "description": "A SilverStripe module to share content to Facebook, Linkedin and Twitter'",
     "type": "silverstripe-module",
     "license": "BSD-3-Clause",
