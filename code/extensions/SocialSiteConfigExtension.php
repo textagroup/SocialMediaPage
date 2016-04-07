@@ -59,12 +59,14 @@ class SocialSiteConfigExtension extends DataExtension {
 				$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
 					LiteralField::create(
 						'FacebookAccessTokenExpires',
+						// TODO Internationalisation
 						"Token expires in $tokenAge days"
 					)
 				);
 				$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
 					CheckboxField::create(
 						'FacebookAccessTokenClear',
+						// TODO Internationalisation
 						'Clear Facebook Access Token'
 					)
 				);
@@ -72,6 +74,7 @@ class SocialSiteConfigExtension extends DataExtension {
 				$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
 					LiteralField::create(
 						'FacebookAccessTokenExpires',
+						// TODO Internationalisation
 						'Token has expired'
 					)
 				);
@@ -80,6 +83,7 @@ class SocialSiteConfigExtension extends DataExtension {
 			$fields->addFieldToTab('Root.SocialMedia.FacebookPublish',
 				CheckboxField::create(
 					'FacebookAccessTokenClear',
+					 // TODO Internationalisation
 					'Clear Facebook Access Token'
 				)
 			);
@@ -102,12 +106,14 @@ class SocialSiteConfigExtension extends DataExtension {
 		// LinkedIn fields
 		$fields->addFieldToTab("Root.SocialMedia.LinkedInPublish",
 			TextField::create(
-				'LinkedInId',
+				 'LinkedInId',
+				 // TODO Internationalisation
 				'LinkedIn Page ID'
 			)
 		);
 		$fields->addFieldToTab("Root.SocialMedia.LinkedInPublish",
 			TextField::create(
+				 // TODO Internationalisation
 				'LinkedInSecret',
 				'LinkedIn Secret'
 			)
@@ -123,6 +129,7 @@ class SocialSiteConfigExtension extends DataExtension {
 			$fields->addFieldToTab('Root.SocialMedia.LinkedInPublish',
 				CheckboxField::create(
 					'LinkedInAccessTokenClear',
+					// TODO Internationalisation
 					'Clear LinkedIn Access Token'
 				)
 			);
@@ -143,6 +150,7 @@ class SocialSiteConfigExtension extends DataExtension {
 					$siteConfig->LinkedInAccessToken = $accessToken;
 					$siteConfig->write();
 					$fields->addFieldToTab('Root.SocialMedia.LinkedInPublish',
+						// TODO Internationalisation
 						TextField::create('LinkedInAccessToken',
 							'LinkedIn Access Token',
 							$accessToken
@@ -161,6 +169,7 @@ class SocialSiteConfigExtension extends DataExtension {
 		// Twitter settings
 		$fields->addFieldsToTab('Root.SocialMedia.Twitter', array(
 			HeaderField::create('TwitterHeader', 'Twitter Publishing'),
+			// TODO Internationalisation
 			LiteralField::create(
 				'TwitterHelp', 
 				'Note that you will need to set up a separate Twitter App for each server you run a copy of the site on, '.
@@ -170,6 +179,7 @@ class SocialSiteConfigExtension extends DataExtension {
 			TextField::create('TwitterConsumerSecret', 'Consumer Secret'),
 			TextField::create('TwitterAccessToken', 'Access Token'),
 			TextField::create('TwitterAccessSecret', 'Access Token Secret')
+			// TODO Internationalisation
 			->setDescription(
 				'Visit <a href="https://apps.twitter.com/">https://apps.twitter.com/</a> and log in as the user '.
 				'maintaining the Twitter App for this site.<br>'.
