@@ -12,6 +12,7 @@
     "minimum-stability": "beta",
     "require": {
         "jublonet/codebird-php": "2.5.0",
-        "facebook/php-sdk-v4": "^5.0@dev"
+        "facebook/php-sdk-v4": "^5.0@dev",
+        "happyr/linkedin-api-client": "0.6.3"
     }
 }
