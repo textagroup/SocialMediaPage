@@ -23,7 +23,7 @@ class SocialSiteConfigExtension extends DataExtension {
     );
 
     public function updateCMSFields(FieldList $fields) {
-        if (file_exits(
+        if (file_exists(
             SOCIALMEDIA_MODULE_DIR . '/images/' . i18n::get_locale() . '_twitter-help.png'
         )) {
             $helpImage = SOCIALMEDIA_MODULE_DIR . '/images/' . i18n::get_locale();
