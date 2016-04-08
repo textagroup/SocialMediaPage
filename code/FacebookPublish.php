@@ -34,9 +34,6 @@ class FacebookPublish extends Controller {
 					 $siteConfig->write();
 				}
 		  }
-
-		  // check if we need to set a access token
-		  $isTokenValid = $this->isAccessTokenValid();
 	 }
 
 	 public function isAccessTokenValid() {
