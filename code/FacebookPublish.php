@@ -75,11 +75,13 @@ class FacebookPublish extends Controller {
 					 $pageId = ($siteConfig->FacebookPageId)
 						  ? $siteConfig->FacebookPageId
 						  : null;
-					 // throw user error id no facebook page id is set
+					 // log user error id no facebook page id is set
 					 if ($pageId == null) {
-						return _t('SocialMediaPage.FACEBOOKPAGEIDNOTSET',
+						$msg = _t('SocialMediaPage.FACEBOOKPAGEIDNOTSET',
 							'Facebook page ID must be set'
 						);
+						SS_Log::log($msg, SS_Log::NOTICE);
+						return false;
 					 }
 					 // get page access token
 					 $response = $this->fb->get("/$pageId?fields=access_token", $accessToken);
@@ -88,13 +90,15 @@ class FacebookPublish extends Controller {
 					 // post to feed using page access token
 					 $response = $this->fb->post("/$pageId/feed", $linkData, $pageAccessToken);
 				} catch (Facebook\Exceptions\FacebookResponseException $e) {
-					 echo _t('SocialMediaPage.GRAPHRETURNEDERROR', 
+					$msg = _t('SocialMediaPage.GRAPHRETURNEDERROR', 
 						'Graph returned an error: ') . $e->getMessage();
-					 exit;
+					SS_Log::log($msg, SS_Log::ERR);
+					exit;
 				} catch (Facebook\Exceptions\FacebookSDKException $e) {
-					 echo _t('SocialMediaPage.GRAPHRETURNEDERROR',
+					$msg = _t('SocialMediaPage.GRAPHRETURNEDERROR',
 						'Facebook SDK returned an error: ') . $e->getMessage();
-					 exit;
+					SS_Log::log($msg, SS_Log::ERR);
+					exit;
 				}
 		  }
 		  return true;

@@ -25,7 +25,9 @@ class LinkedinPublish extends Controller {
 			);
 			$result = $linkedIn->post('v1/people/~/shares', $options);
 			if ($linkedIn->hasError()) {
-				return $linkedIn->hasError();
+				$msg = $linkedIn->hasError();
+				SS_Log::log($msg, SS_Log::ERR);
+				return false;
 			}
 			return true;
 		} else {
