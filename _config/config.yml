@@ -1,3 +1,6 @@
 SiteConfig:
   extensions:
     - SocialSiteConfigExtension
+SocialMediaPage:
+  extensions:
+    - SocialMediaExtension
